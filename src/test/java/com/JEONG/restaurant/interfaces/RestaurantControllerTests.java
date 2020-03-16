@@ -13,10 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(RestaurantController.class)
 public class RestaurantControllerTests {
@@ -71,6 +73,16 @@ public class RestaurantControllerTests {
                 .andExpect(content().string(
                         containsString("\"name\":\"Cyber Food\"")
                 ));
+    }
+    @Test
+    public void create() throws Exception {
+        Restaurant restaurant =new Restaurant(1234L,"BeRyong","Seoul");
+
+        mvc.perform(post("/restaurants"))
+                .andExpect(status().isCreated())
+                .andExpect(header().string("location","/restaurants/1234"))
+                .andExpect(content().string("{}"));
+        verify(restaurantService).addRestaurant(any());
     }
 
 
