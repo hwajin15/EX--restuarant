@@ -1,0 +1,17 @@
+{
+  "name": "restaurant-web",
+  "version": "1.0.0",
+  "description": "Restaurant Web Project",
+  "main": "scr/index.js",
+  "scripts": {
+    "start": "webpack-dev-server --port 3000",
+    "test": "jest"
+  },
+  "author": "jeong",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
