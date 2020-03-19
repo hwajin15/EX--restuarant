@@ -10,8 +10,6 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -27,13 +25,19 @@ class MenuItemServiceTests {
     }
     @Test
     public void bulkUpdate(){
-        List<MenuItem> menuItems =new ArrayList<MenuItem>();
+        List<MenuItem> menuItems= new ArrayList<MenuItem>();
 
-        menuItems.add(MenuItem.builder().name("Kimchi").build());
-        menuItems.add(MenuItem.builder().name("Gukbob").build());
-        menuItemService.bulkUpdate(1L,menuItems);
+        MenuItem menuItem = new MenuItem();
+        menuItem.setName("Kimchi");
+        menuItems.add(menuItem);
 
-        verify(menuItemRepository,times(2)).save(any());
+        MenuItem menuItem2 = new MenuItem();
+        menuItem.setName("Gogbob");
+        menuItems.add(menuItem2);
+
+        menuItemService.bulkUpdate(1L, menuItems);
+
+        verify(menuItemRepository, times(2)).save(any());
     }
 
 }

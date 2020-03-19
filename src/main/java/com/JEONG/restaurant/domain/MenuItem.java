@@ -17,7 +17,7 @@ public class MenuItem {
     private Long id;
     @Setter
     private Long restaurantId;
-
+    @Setter
     private  String name;
 
 }
