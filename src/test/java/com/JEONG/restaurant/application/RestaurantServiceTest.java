@@ -1,9 +1,6 @@
 package com.JEONG.restaurant.application;
 
-import com.JEONG.restaurant.domain.MenuItem;
-import com.JEONG.restaurant.domain.MenuItemRepository;
-import com.JEONG.restaurant.domain.Restaurant;
-import com.JEONG.restaurant.domain.RestaurantRepository;
+import com.JEONG.restaurant.domain.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -64,7 +61,7 @@ public class RestaurantServiceTest {
         assertThat(restaurant.getId(), is(1004L));
     }
     @Test
-    public void getRestaurant(){
+    public void getRestaurantWithExisted(){
         Restaurant restaurant = restaurantService.getRestaurant(1004L);
 
         assertThat(restaurant.getId(),is(1004L));
@@ -73,6 +70,10 @@ public class RestaurantServiceTest {
         assertThat(menuItem.getName(),is("Kimchi"));
 
     }
+//    @Test(expected = RestaurantNotFoundException.class)
+//    public void getRestaurantWithNotExisted(){
+//        restaurantService.getRestaurant(404L);
+//    }
     @Test
     public void addRestaurant(){
         given(restaurantRepository.save(any())).will(invocation -> {
@@ -88,7 +89,7 @@ public class RestaurantServiceTest {
         assertThat(created.getId(),is(1234L));
     }
     @Test
-    public void  updateRestaurant(){
+    public void updateRestaurant(){
 
         Restaurant restaurant =  Restaurant.builder()
                 .id(1004L)

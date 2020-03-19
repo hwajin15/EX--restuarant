@@ -30,8 +30,7 @@ public class RestaurantController {
         return restaurant ;
     }
     @PostMapping("/restaurants")
-    public ResponseEntity<?> create(@Valid @RequestBody Restaurant resource)
-            throws URISyntaxException {
+    public ResponseEntity<?> create(@Valid @RequestBody Restaurant resource) throws URISyntaxException {
 
         Restaurant restaurant =restaurantService.addRestaurant(
                 Restaurant.builder()
@@ -50,4 +49,5 @@ public class RestaurantController {
         restaurantService.updateRestaurant(id, name, address);
         return "{}";
     }
+
 }
