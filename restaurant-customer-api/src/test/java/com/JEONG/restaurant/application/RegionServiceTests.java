@@ -1,0 +1,41 @@
+package com.JEONG.restaurant.application;
+
+import com.JEONG.restaurant.domain.Region;
+import com.JEONG.restaurant.domain.RegionRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.BDDMockito.given;
+
+public class RegionServiceTests {
+    private RegionService regionsService;
+    @Mock
+    private RegionRepository regionRepository;
+
+    @BeforeEach
+    public void setUp(){
+        MockitoAnnotations.initMocks(this);
+        regionsService = new RegionService(regionRepository);
+    }
+
+    @Test
+    public void getRegions(){
+        List<Region> mockRegions = new ArrayList<>();
+        mockRegions.add(Region.builder().name("Seoul").build());
+        given(regionRepository.findAll()).willReturn(mockRegions);
+
+        
+        List<Region> regions = regionsService.getRegions();
+
+        Region region = regions.get(0);
+        assertThat(region.getName(), is("Seoul"));
+    }
+
+}
