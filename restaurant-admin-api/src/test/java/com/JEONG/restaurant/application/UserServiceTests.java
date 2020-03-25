@@ -48,7 +48,11 @@ public class UserServiceTests {
     public void addUser(){
         String email = "admin@example.com";
         String name = "admin";
-        User mockUser = User.builder().email(email).name(name).build();
+        User mockUser = User.builder()
+                .email(email)
+                .name(name)
+                .level(1L)
+                .build();
         given(userRepository.save(any())).willReturn(mockUser);
         User user = userService.addUser(email,name);
         assertThat(user.getName(), is(name));
